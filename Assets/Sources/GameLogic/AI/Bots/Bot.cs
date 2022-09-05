@@ -10,6 +10,7 @@ namespace Sources.GameLogic.AI.Bots
         protected OpeningBook _openingBook;
 
         public OpeningBook OpeningBook => _openingBook;
+        
         public event Action<Move> MoveSelected;
 
         protected Bot()

@@ -34,6 +34,8 @@ namespace Sources
             Stone stone = Instantiate(_stonePrefab, transform.position, Quaternion.identity);
             stone.Init(_renderer.material.color);
             stone.TakePlace(position);
+            
+            _animator.SetTrigger("Throw");
         }
 
         private void SetRunningState(bool value)
