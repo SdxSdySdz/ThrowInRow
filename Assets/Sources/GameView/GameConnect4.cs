@@ -68,6 +68,22 @@ namespace Sources.GameView
         private void OnGameOver(PlayerColor winnerColor, List<(int Row, int Column, int Peak)> winningIndices)
         {
             _board.ShowWinningStones(winningIndices);
+
+            StoneThrower winner;
+            StoneThrower loser;
+            if (_playerColor == winnerColor)
+            {
+                winner = _player;
+                loser = _enemy;
+            }
+            else
+            {
+                winner = _enemy;
+                loser = _player;
+            }
+
+            winner.Win();
+            loser.Lose();
         }
     }
 }

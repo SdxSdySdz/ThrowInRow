@@ -37,6 +37,16 @@ namespace Sources
             _animator.SetTrigger("Throw");
         }
 
+        public void Win()
+        {
+            _animator.SetTrigger("Win");
+        }
+
+        public void Lose()
+        {
+            _animator.SetTrigger("Lose");
+        }
+
         private void SetRunningState(bool value)
         {
             if (_isRunning == value)

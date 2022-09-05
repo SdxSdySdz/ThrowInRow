@@ -19,5 +19,15 @@ namespace Sources
         {
             MoveRequested?.Invoke(move);
         }
+
+        public void Win()
+        {
+            _human.Win();
+        }
+
+        public void Lose()
+        {
+            _human.Lose();
+        }
     }
 }
