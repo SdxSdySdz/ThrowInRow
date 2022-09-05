@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottom: {fileID: 7530273332091778136}
+  _stonesDistanceBetween: 1.5
 --- !u!1 &5442632750051313803
 GameObject:
   m_ObjectHideFlags: 0

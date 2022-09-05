@@ -5,6 +5,7 @@ namespace Sources.GameView
     public class Peak : MonoBehaviour
     {
         [SerializeField] private Transform _bottom;
+        [SerializeField] private float _stonesDistanceBetween;
 
         public int Row { get; private set; }
 
@@ -25,7 +26,7 @@ namespace Sources.GameView
 
         public Vector3 GetStonePosition(int freeHeight)
         {
-            return _bottom.position + Vector3.up * freeHeight;
+            return _bottom.position + Vector3.up * (_stonesDistanceBetween * freeHeight);
         }
     }
 }
