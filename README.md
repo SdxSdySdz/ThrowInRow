@@ -1,1 +1,1 @@
-echo "# ThrowInRow" 
+# ThrowInRow
