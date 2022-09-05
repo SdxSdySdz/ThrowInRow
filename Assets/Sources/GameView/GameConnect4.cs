@@ -67,6 +67,9 @@ namespace Sources.GameView
         
         private void OnGameOver(PlayerColor winnerColor, List<(int Row, int Column, int Peak)> winningIndices)
         {
+            _player.MoveRequested -= OnMoveRequestedByPlayer;
+            _enemy.MoveRequested -= OnMoveRequestedByEnemy;
+            
             _board.ShowWinningStones(winningIndices);
 
             StoneThrower winner;
@@ -81,7 +84,7 @@ namespace Sources.GameView
                 winner = _enemy;
                 loser = _player;
             }
-
+            
             winner.Win();
             loser.Lose();
         }
