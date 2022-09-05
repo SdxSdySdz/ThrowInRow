@@ -77,10 +77,11 @@ namespace Sources.GameLogic.Core
                 return false;
             }
         }
-
+        
         private bool CheckWinByLastMoveDebug(out List<(int Row, int Column, int Peak)> winningIndices)
         {
-            if (_board.StoneCount < 2 * _winningStoneCount - 1)
+            int requiredToWinCount = 2 * _winningStoneCount - 1;
+            if (_board.StoneCount < requiredToWinCount)
             {
                 winningIndices = null;
                 return false;
@@ -94,7 +95,6 @@ namespace Sources.GameLogic.Core
             int rowHorizontalSum = Mathf.Abs(_board.GetHorizontalSumByRowPlane(column, peak));
             if (rowHorizontalSum == _winningStoneCount)
             {
-                // Debug.LogError("rowHorizontalWin");
                 for (int i = 0; i < _winningStoneCount; i++)
                 {
                     winningIndices.Add((i, column, peak));
@@ -106,7 +106,6 @@ namespace Sources.GameLogic.Core
             int columnHorizontalSum = Mathf.Abs(_board.GetHorizontalSumByColumnPlane(row, peak));
             if (columnHorizontalSum == _winningStoneCount)
             {
-                // Debug.LogError("columnHorizontalWin");
                 for (int i = 0; i < _winningStoneCount; i++)
                 {
                     winningIndices.Add((row, i, peak));
@@ -118,7 +117,6 @@ namespace Sources.GameLogic.Core
             int verticalSum = Mathf.Abs(_board.GetVerticalSum(row, column));
             if (verticalSum == _winningStoneCount)
             {
-                // Debug.LogError("VerticalWin");
                 for (int i = 0; i < _winningStoneCount; i++)
                 {
                     winningIndices.Add((row, column, i));
@@ -127,14 +125,28 @@ namespace Sources.GameLogic.Core
                 return true;
             }
 
-            List<int[]> diagonals = _board.GetAllDiagonals();
+            List<BoardIndex[]> diagonalsIndices = _board.GetAllDiagonalsIndices();
+            foreach (var indices in diagonalsIndices)
+            {
+                int sum = indices
+                    .Select(index => _board.GetStone(index.Row, index.Column, index.Peak))
+                    .Sum();
+                if (Mathf.Abs(sum) == _winningStoneCount)
+                {
+                    winningIndices = indices
+                        .Select(index => (index.Row, index.Column, index.Peak))
+                        .ToList();
+                    return true;
+                }
+            }
+            /*List<int[]> diagonals = _board.GetAllDiagonals();
             foreach (var diagonal in diagonals)
             {
                 if (Mathf.Abs(diagonal.Sum()) == _winningStoneCount)
                 {
                     return true;
                 }
-            }
+            }*/
 
             winningIndices = null;
             return false;

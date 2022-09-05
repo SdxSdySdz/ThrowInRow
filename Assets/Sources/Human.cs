@@ -1,5 +1,4 @@
-﻿using System;
-using Sources.GameView;
+﻿using Sources.GameView;
 using UnityEngine;
 
 namespace Sources

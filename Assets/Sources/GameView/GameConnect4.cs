@@ -1,4 +1,5 @@
-﻿using Sources.AI;
+﻿using System.Collections.Generic;
+using Sources.AI;
 using Sources.GameLogic.Core;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Sources.GameView
 
         private GameState _game;
         private PlayerColor _playerColor;
-
+        
         private void Awake()
         {
             _game = GameState.NewGame;
@@ -55,8 +56,8 @@ namespace Sources.GameView
 
             thrower.ThrowStone(_board.GetFreeStonePosition(move.Row, move.Column));
 
-            if (_game.TryGetWinner(out PlayerColor winnerColor, out _))
-                OnGameOver(winnerColor);
+            if (_game.TryGetWinner(out PlayerColor winnerColor, out List<(int, int, int)> indices))
+                OnGameOver(winnerColor, indices);
         }
 
         private void ForceEnemyMove()
@@ -64,8 +65,9 @@ namespace Sources.GameView
             _enemy.ForceMove(_game);
         }
         
-        private void OnGameOver(PlayerColor winnerColor)
+        private void OnGameOver(PlayerColor winnerColor, List<(int Row, int Column, int Peak)> winningIndices)
         {
+            _board.ShowWinningStones(winningIndices);
         }
     }
 }

@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placer: {fileID: 1396595461}
+  _winningStonePrefab: {fileID: 5576642536066590170, guid: 2fa893c98237d1e4e9b188e4dcb86858, type: 3}
 --- !u!114 &546160995 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3544020431155653836, guid: d1378cf305487e449a27878c54d033e8, type: 3}

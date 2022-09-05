@@ -200,7 +200,112 @@ namespace Sources.GameLogic.Core
 
             return diagonals;
         }
+        
+        public List<BoardIndex[]> GetAllDiagonalsIndices()
+        {
+            var diagonals = new List<BoardIndex[]>();
 
+            for (int row = 0; row < _rowCount; row++)
+            {
+                BoardIndex[] diagonal =
+                {
+                    new BoardIndex(row, 0, 0),
+                    new BoardIndex(row, 1, 1),
+                    new BoardIndex(row, 2, 2),
+                    new BoardIndex(row, 3, 3),
+                };
+                diagonals.Add(diagonal);
+
+                BoardIndex[] sideDiagonal =
+                {
+                    new BoardIndex(row, 0, 3),
+                    new BoardIndex(row, 1, 2),
+                    new BoardIndex(row, 2, 1),
+                    new BoardIndex(row, 3, 0),
+                };
+                diagonals.Add(sideDiagonal);
+            }
+
+            for (int column = 0; column < _columnCount; column++)
+            {
+                BoardIndex[] diagonal =
+                {
+                    new BoardIndex(0, column, 0),
+                    new BoardIndex(1, column, 1),
+                    new BoardIndex(2, column, 2),
+                    new BoardIndex(3, column, 3),
+                };
+                diagonals.Add(diagonal);
+
+                BoardIndex[] sideDiagonal =
+                {
+                    new BoardIndex(0, column, 3),
+                    new BoardIndex(1, column, 2),
+                    new BoardIndex(2, column, 1),
+                    new BoardIndex(3, column, 0),
+                };
+                diagonals.Add(sideDiagonal);
+            }
+
+            for (int peak = 0; peak < _peakCount; peak++)
+            {
+                BoardIndex[] diagonal =
+                {
+                    new BoardIndex(0, 0, peak),
+                    new BoardIndex(1, 1, peak),
+                    new BoardIndex(2, 2, peak),
+                    new BoardIndex(3, 3, peak),
+                };
+                diagonals.Add(diagonal);
+
+                BoardIndex[] sideDiagonal =
+                {
+                    new BoardIndex(0, 3, peak),
+                    new BoardIndex(1, 2, peak),
+                    new BoardIndex(2, 1, peak),
+                    new BoardIndex(3, 0, peak),
+                };
+                diagonals.Add(sideDiagonal);
+            }
+
+            BoardIndex[] bigAscendingDiagonal =
+            {
+                new BoardIndex(0, 0, 0),
+                new BoardIndex(1, 1, 1),
+                new BoardIndex(2, 2, 2),
+                new BoardIndex(3, 3, 3),
+            };
+            diagonals.Add(bigAscendingDiagonal);
+
+            BoardIndex[] bigDescendingDiagonal =
+            {
+                new BoardIndex(0, 0, 3),
+                new BoardIndex(1, 1, 2),
+                new BoardIndex(2, 2, 1),
+                new BoardIndex(3, 3, 0),
+            };
+            diagonals.Add(bigDescendingDiagonal);
+
+            BoardIndex[] bigAscendingSideDiagonal =
+            {
+                new BoardIndex(0, 3, 0),
+                new BoardIndex(1, 2, 1),
+                new BoardIndex(2, 1, 2),
+                new BoardIndex(3, 0, 3),
+            };
+            diagonals.Add(bigAscendingSideDiagonal);
+
+            BoardIndex[] bigDescendingSideDiagonal =
+            {
+                new BoardIndex(0, 3, 3),
+                new BoardIndex(1, 2, 2),
+                new BoardIndex(2, 1, 1),
+                new BoardIndex(3, 0, 0),
+            };
+            diagonals.Add(bigDescendingSideDiagonal);
+
+            return diagonals;
+        }
         // not optimized
         /*        public List<int[]> GetDiagonals(int row, int column, int peak)
             {
