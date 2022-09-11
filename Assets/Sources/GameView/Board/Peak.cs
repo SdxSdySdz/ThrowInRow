@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.GameView
+namespace Sources.GameView.Board
 {
     public class Peak : MonoBehaviour
     {

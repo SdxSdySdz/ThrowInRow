@@ -1,9 +1,10 @@
 using Sources.GameLogic.Core;
 using Sources.GameView;
+using Sources.GameView.Board;
 using Sources.Services.Input;
 using UnityEngine;
 
-namespace Sources
+namespace Sources.StoneThrowers
 {
     public class Player : StoneThrower
     {

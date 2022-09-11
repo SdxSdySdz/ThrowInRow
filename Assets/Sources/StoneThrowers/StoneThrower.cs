@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Sources
+namespace Sources.StoneThrowers
 {
     public abstract class StoneThrower : MonoBehaviour
     {

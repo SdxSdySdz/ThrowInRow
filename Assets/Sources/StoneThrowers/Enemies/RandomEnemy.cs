@@ -1,6 +1,6 @@
 ﻿using Sources.GameLogic.AI.Bots;
 
-namespace Sources.AI
+namespace Sources.StoneThrowers.Enemies
 {
     public class RandomEnemy : Enemy<RandomBot>
     {

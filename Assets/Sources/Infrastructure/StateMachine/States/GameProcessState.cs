@@ -1,43 +1,50 @@
 ﻿using System.Collections.Generic;
-using Sources.AI;
+using System.Linq;
 using Sources.GameLogic.Core;
+using Sources.GameView.Board;
+using Sources.Infrastructure.StateMachine.States.Core;
+using Sources.StoneThrowers;
+using Sources.StoneThrowers.Enemies;
 using UnityEngine;
 
-namespace Sources.GameView
+namespace Sources.Infrastructure.StateMachine.States
 {
-    public class GameConnect4 : MonoBehaviour
+    public class GameProcessState : IndependentState
     {
         [SerializeField] private Player _player;
         [SerializeField] private Enemy _enemy;
-        [SerializeField] private Board _board;
+        [SerializeField] private SceneBoard sceneBoard;
 
         private GameState _game;
         private PlayerColor _playerColor;
-        
-        private void Awake()
+
+        protected override void OnEnter()
+        {
+            InitWorld();
+
+            _player.MoveRequested += OnMoveRequestedByPlayer;
+            _enemy.MoveRequested += OnMoveRequestedByEnemy;
+        }
+
+        protected override void OnExit()
+        {
+            _player.MoveRequested -= OnMoveRequestedByPlayer;
+            _enemy.MoveRequested -= OnMoveRequestedByEnemy;
+        }
+
+        private void InitWorld()
         {
             _game = GameState.NewGame;
             _playerColor = PlayerColor.White;
         }
 
-        private void OnEnable()
-        {
-            _player.MoveRequested += OnMoveRequestedByPlayer;
-            _enemy.MoveRequested += OnMoveRequestedByEnemy;
-        }
-        
-        private void OnDisable()
-        {
-            _player.MoveRequested -= OnMoveRequestedByPlayer;
-            _enemy.MoveRequested -= OnMoveRequestedByEnemy;
-        }
 
         private void OnMoveRequestedByPlayer(Move move)
         {
             if (_game.PlayerColorToMove == _playerColor && _game.IsValidMove(move))
             {
                 ApplyMove(move, _player);
-                ForceEnemyMove();
+                _enemy.ForceMove(_game);
             }
         }
 
@@ -52,41 +59,22 @@ namespace Sources.GameView
         private void ApplyMove(Move move, StoneThrower thrower)
         {
             _game = _game.ApplyMove(move);
-            _board.UpdateGameState(_game);
+            sceneBoard.UpdateGameState(_game);
 
-            thrower.ThrowStone(_board.GetFreeStonePosition(move.Row, move.Column));
+            thrower.ThrowStone(sceneBoard.GetFreeStonePosition(move.Row, move.Column));
 
             if (_game.TryGetWinner(out PlayerColor winnerColor, out List<(int, int, int)> indices))
                 OnGameOver(winnerColor, indices);
         }
 
-        private void ForceEnemyMove()
-        {
-            _enemy.ForceMove(_game);
-        }
-        
         private void OnGameOver(PlayerColor winnerColor, List<(int Row, int Column, int Peak)> winningIndices)
         {
-            _player.MoveRequested -= OnMoveRequestedByPlayer;
-            _enemy.MoveRequested -= OnMoveRequestedByEnemy;
+            var result = new GameResult(
+                winnerColor, 
+                winningIndices.Select(index => new BoardIndex(index.Row, index.Column, index.Peak))
+                );
             
-            _board.ShowWinningStones(winningIndices);
-
-            StoneThrower winner;
-            StoneThrower loser;
-            if (_playerColor == winnerColor)
-            {
-                winner = _player;
-                loser = _enemy;
-            }
-            else
-            {
-                winner = _enemy;
-                loser = _player;
-            }
-            
-            winner.Win();
-            loser.Lose();
+            StateMachine.Enter<GameResultState, GameResult>(result);
         }
     }
 }

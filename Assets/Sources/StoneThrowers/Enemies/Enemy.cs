@@ -1,8 +1,7 @@
 ﻿using Sources.GameLogic.AI.Bots;
 using Sources.GameLogic.Core;
-using UnityEngine;
 
-namespace Sources.AI
+namespace Sources.StoneThrowers.Enemies
 {
     public abstract class Enemy : StoneThrower
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using Sources.GameLogic.Core;
 using UnityEngine;
 
-namespace Sources.GameView
+namespace Sources.GameView.Board
 {
-    public class Board : MonoBehaviour
+    public class SceneBoard : MonoBehaviour
     {
         [SerializeField] private PeaksPlacer _placer;
         [SerializeField] private Stone _winningStonePrefab;
@@ -36,9 +36,9 @@ namespace Sources.GameView
             throw new IndexOutOfRangeException();
         }
 
-        public void ShowWinningStones(List<(int Row, int Column, int Peak)> winningIndices)
+        public void ShowWinningStones(IEnumerable<BoardIndex> winningIndices)
         {
-            List<Vector3> winningPositions = new List<Vector3>(winningIndices.Count);
+            List<Vector3> winningPositions = new List<Vector3>(winningIndices.Count());
             foreach (var index in winningIndices)
             {
                 Peak peak = GetPeak(index.Row, index.Column);

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Sources.Services.Input
@@ -10,7 +9,7 @@ namespace Sources.Services.Input
 
         private Vector2 _previousTouchPosition;
         
-        public Vector2 TouchDelta { get; protected set; }
+        public Vector2 TouchDelta { get; private set; }
         public abstract bool IsTouching { get; }
 
         public event UnityAction<Collider> ColliderTouched; 

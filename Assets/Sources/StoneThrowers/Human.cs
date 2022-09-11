@@ -1,7 +1,7 @@
-﻿using Sources.GameView;
+﻿using Sources.GameView.Board;
 using UnityEngine;
 
-namespace Sources
+namespace Sources.StoneThrowers
 {
     public class Human : MonoBehaviour
     {

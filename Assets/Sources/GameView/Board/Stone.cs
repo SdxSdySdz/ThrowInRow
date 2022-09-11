@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Sources.GameView
+namespace Sources.GameView.Board
 {
     public class Stone : MonoBehaviour
     {

@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sources.GameView
+namespace Sources.GameView.Board
 {
     public class PeaksPlacer : MonoBehaviour
     {
