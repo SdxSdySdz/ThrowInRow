@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Sources.Infrastructure.StateMachine.States.Core
 {
     public abstract class PayloadedState<TPayload> : State
@@ -6,6 +8,8 @@ namespace Sources.Infrastructure.StateMachine.States.Core
         
         public void Enter(GameStateMachine stateMachine, SceneLoader sceneLoader, TPayload payload)
         {
+            Debug.LogError($"Enter {this.GetType().Name}");
+            
             enabled = true;
             StateMachine = stateMachine;
             SceneLoader = sceneLoader;

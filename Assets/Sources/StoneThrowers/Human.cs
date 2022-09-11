@@ -64,5 +64,10 @@ namespace Sources.StoneThrowers
             _isRunningLeft = isRunningRight;
             transform.forward = -transform.forward;
         }
+
+        public void Idle()
+        {
+            _animator.Play("Idle");
+        }
     }
 }

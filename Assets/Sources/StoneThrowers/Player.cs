@@ -9,7 +9,7 @@ namespace Sources.StoneThrowers
     public class Player : StoneThrower
     {
         [SerializeField] private InputService _inputService;
-        
+
         private void OnEnable()
         {
             _inputService.ColliderTouched += OnColliderTouched;

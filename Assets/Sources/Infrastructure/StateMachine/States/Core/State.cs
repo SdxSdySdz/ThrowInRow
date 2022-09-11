@@ -10,7 +10,10 @@ namespace Sources.Infrastructure.StateMachine.States.Core
         private void Awake()
         {
             enabled = false;
+            OnAwake();
         }
+
+        protected virtual void OnAwake() {  }
 
         protected virtual void OnEnter() {  }
         protected virtual void OnExit() {  }

@@ -17,10 +17,8 @@ namespace Sources.Infrastructure.StateMachine
         {
             _states = new Dictionary<Type, State>()
             {
-                { typeof(BootstrapState), GameObject.FindObjectOfType<BootstrapState>()},
                 { typeof(GameProcessState), GameObject.FindObjectOfType<GameProcessState>()},
                 { typeof(GameResultState), GameObject.FindObjectOfType<GameResultState>()},
-                { typeof(RestartState), GameObject.FindObjectOfType<RestartState>()},
             };
             
             _sceneLoader = new SceneLoader(this);

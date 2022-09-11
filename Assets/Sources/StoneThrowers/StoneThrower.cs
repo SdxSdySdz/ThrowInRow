@@ -29,5 +29,15 @@ namespace Sources.StoneThrowers
         {
             _human.Lose();
         }
+        
+        public void StopRunning()
+        {
+            _human.Stop();
+        }
+
+        public void Idle()
+        {
+            _human.Idle();
+        }
     }
 }
